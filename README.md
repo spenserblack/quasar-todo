@@ -1,5 +1,7 @@
 # Quasar Todo (quasar-todo)
 
+[![CI](https://github.com/spenserblack/quasar-todo/actions/workflows/ci.yml/badge.svg)](https://github.com/spenserblack/quasar-todo/actions/workflows/ci.yml)
+
 A to-do list built with Electron + Quasar
 
 ## Install the dependencies
