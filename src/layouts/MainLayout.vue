@@ -1,6 +1,25 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
+import { useQuasar } from 'quasar';
 import EssentialLink, { EssentialLinkProps } from 'components/EssentialLink.vue';
+import { loadTheme, saveTheme } from '../util';
+
+const $q = useQuasar();
+
+$q.dark.set(loadTheme());
+const isDark = computed({
+  get() {
+    return $q.dark.isActive;
+  },
+  set(value) {
+    $q.dark.set(value);
+    saveTheme(value);
+  },
+});
+const toggleDark = () => {
+  isDark.value = !isDark.value;
+};
+const toggleDarkIcon = computed(() => `${isDark.value ? 'light' : 'dark'}_mode`);
 
 const essentialLinks: EssentialLinkProps[] = [
   {
@@ -71,7 +90,14 @@ function toggleLeftDrawer() {
           Quasar App
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <q-btn
+            flat
+            dense
+            round
+            :icon="toggleDarkIcon"
+            aria-label="Toggle Dark Mode"
+            @click="toggleDark"
+        />
       </q-toolbar>
     </q-header>
 
