@@ -1,6 +1,7 @@
 import { app, BrowserWindow, nativeTheme } from 'electron';
 import path from 'path';
 import os from 'os';
+import setupIpcMain from './electron-ipc-main';
 
 // needed in case process is undefined under Linux
 const platform = process.platform || os.platform();
@@ -48,7 +49,10 @@ function createWindow() {
   });
 }
 
-app.whenReady().then(createWindow);
+app.whenReady().then(() => {
+  createWindow();
+  setupIpcMain();
+});
 
 app.on('window-all-closed', () => {
   if (platform !== 'darwin') {
