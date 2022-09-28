@@ -2,6 +2,8 @@
 import { computed, ref } from 'vue';
 import { useQuasar } from 'quasar';
 import EssentialLink, { EssentialLinkProps } from 'components/EssentialLink.vue';
+import EssentialResource from 'components/EssentialResource.vue';
+import { showDbFile } from '../electron';
 import { loadTheme, saveTheme } from '../util';
 
 const $q = useQuasar();
@@ -74,13 +76,19 @@ function toggleLeftDrawer() {
         <q-item-label
           header
         >
-          Essential Links
+          Essential Links &amp; Resources
         </q-item-label>
 
         <EssentialLink
           v-for="link in essentialLinks"
           :key="link.title"
           v-bind="link"
+        />
+        <EssentialResource
+          title="Database File"
+          caption="Show database file"
+          icon="folder_open"
+          @click="showDbFile"
         />
       </q-list>
     </q-drawer>
