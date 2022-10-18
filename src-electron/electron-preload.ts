@@ -1,7 +1,8 @@
 import { contextBridge, ipcRenderer } from 'electron';
-import { openWithBrowserKey, showDbFileKey } from './electron-ipc-keys';
+import * as keys from './electron-ipc-keys';
 
 contextBridge.exposeInMainWorld('electronAPI', {
-  openWithBrowser: (url: string) => ipcRenderer.send(openWithBrowserKey, url),
-  showDbFile: () => ipcRenderer.send(showDbFileKey),
+  openWithBrowser: (url: string) => ipcRenderer.send(keys.openWithBrowser, url),
+  showDbFile: () => ipcRenderer.send(keys.showDbFile),
+  addTodoList: (title: string) => ipcRenderer.send(keys.addTodoList, title),
 });
