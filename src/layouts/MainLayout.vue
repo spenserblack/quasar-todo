@@ -3,7 +3,7 @@ import { computed, ref } from 'vue';
 import { useQuasar } from 'quasar';
 import EssentialLink, { EssentialLinkProps } from 'components/EssentialLink.vue';
 import EssentialResource from 'components/EssentialResource.vue';
-import { showDbFile } from '../electron';
+import { showDbFile, isElectron } from '../electron';
 import { loadTheme, saveTheme } from '../util';
 
 const $q = useQuasar();
@@ -85,6 +85,7 @@ function toggleLeftDrawer() {
           v-bind="link"
         />
         <EssentialResource
+          v-if="isElectron"
           title="Database File"
           caption="Show database file"
           icon="folder_open"
