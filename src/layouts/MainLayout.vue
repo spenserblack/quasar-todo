@@ -53,7 +53,7 @@ function toggleLeftDrawer() {
         />
 
         <q-toolbar-title>
-          Quasar App
+          Quasar Todo
         </q-toolbar-title>
 
         <q-btn
