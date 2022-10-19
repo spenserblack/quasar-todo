@@ -13,7 +13,7 @@ function showDbFile(_event: Event) {
 
 async function addTodoList(_event: InvokeEvent, name: string) {
   const todoList = await TodoList.create({ name });
-  return todoList;
+  return todoList.toJSON();
 }
 
 export default function setup() {
