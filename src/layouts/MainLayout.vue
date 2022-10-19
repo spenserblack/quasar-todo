@@ -79,17 +79,20 @@ function toggleLeftDrawer() {
           Essential Links &amp; Resources
         </q-item-label>
 
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
         <EssentialResource
           v-if="isElectron"
           title="Database File"
           caption="Show database file"
           icon="folder_open"
           @click="showDbFile"
+        />
+
+        <q-separator v-if="isElectron" inset />
+
+        <EssentialLink
+          v-for="link in essentialLinks"
+          :key="link.title"
+          v-bind="link"
         />
       </q-list>
     </q-drawer>
