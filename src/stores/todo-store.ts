@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { addTodoList, isElectron } from '../electron';
+import { getTodoLists, addTodoList, isElectron } from '../electron';
 import type { TodoList } from '../models';
 
 // TODO: Set store asynchronously (probably needs to be done in App.vue)
@@ -8,6 +8,18 @@ export const useTodoStore = defineStore('todo', {
     todoLists: [] as TodoList[],
   }),
   actions: {
+    /**
+     * Refreshes the todo lists from the database.
+     */
+    async refreshTodoLists() {
+      let todoLists: TodoList[];
+      if (isElectron) {
+        todoLists = await getTodoLists!();
+      } else {
+        todoLists = JSON.parse(localStorage.getItem('todoLists') || '[]');
+      }
+      this.todoLists.splice(0, this.todoLists.length, ...todoLists);
+    },
     async addTodoList(name: string) {
       let todoList: TodoList;
       if (isElectron) {

@@ -4,11 +4,10 @@ import { useQuasar } from 'quasar';
 import EssentialLink, { EssentialLinkProps } from 'components/EssentialLink.vue';
 import EssentialResource from 'components/EssentialResource.vue';
 import { showDbFile, isElectron } from '../electron';
-import { loadTheme, saveTheme } from '../util';
+import { saveTheme } from '../util';
 
 const $q = useQuasar();
 
-$q.dark.set(loadTheme());
 const isDark = computed({
   get() {
     return $q.dark.isActive;
