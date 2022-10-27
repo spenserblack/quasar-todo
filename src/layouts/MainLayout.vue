@@ -3,7 +3,7 @@ import { computed, ref } from 'vue';
 import { useQuasar } from 'quasar';
 import EssentialLink, { EssentialLinkProps } from 'components/EssentialLink.vue';
 import EssentialResource from 'components/EssentialResource.vue';
-import { showDbFile, isElectron } from '../electron';
+import { showDbFile, isElectron } from '../api';
 import { saveTheme } from '../util';
 
 const $q = useQuasar();
