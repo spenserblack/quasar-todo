@@ -1,42 +1,31 @@
+<script setup lang="ts">
+import { useTodoStore } from '../stores/todo-store';
+
+const todoStore = useTodoStore();
+const maxItemLength = 50;
+const ellipses = (s: string) => (
+  s.length < maxItemLength ? s : `${s.slice(0, maxItemLength - 3)}...`
+);
+</script>
+
 <template>
-  <q-page class="row items-center justify-evenly">
-    <example-component
-      title="Example component"
-      active
-      :todos="todos"
-      :meta="meta"
-    ></example-component>
+  <q-page>
+    <div class="row items-center justify-evenly">
+      <div class="col-auto">
+        <h1 class="text-h2">Main Page</h1>
+      </div>
+    </div>
+    <div class="row items-center justify-evenly">
+      <div class="col-xs-12 col-md-6">
+        <q-list separator>
+          <q-item v-for="list in todoStore.todoLists" clickable v-ripple :key="list.id">
+            <q-item-section>
+              <q-item-label class="text-h">{{ list.name }}</q-item-label>
+              <q-item-label caption>{{ ellipses('List first 3 items with ellipses here') }}</q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-list>
+      </div>
+    </div>
   </q-page>
 </template>
-
-<script setup lang="ts">
-import { Todo, Meta } from 'components/models';
-import ExampleComponent from 'components/ExampleComponent.vue';
-import { ref } from 'vue';
-
-const todos = ref<Todo[]>([
-  {
-    id: 1,
-    content: 'ct1'
-  },
-  {
-    id: 2,
-    content: 'ct2'
-  },
-  {
-    id: 3,
-    content: 'ct3'
-  },
-  {
-    id: 4,
-    content: 'ct4'
-  },
-  {
-    id: 5,
-    content: 'ct5'
-  }
-]);
-const meta = ref<Meta>({
-  totalCount: 1200
-});
-</script>
