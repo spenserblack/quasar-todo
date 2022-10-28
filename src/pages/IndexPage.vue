@@ -6,9 +6,8 @@ const $q = useQuasar();
 
 const todoStore = useTodoStore();
 const maxItemLength = 50;
-const ellipses = (s: string) => (
-  s.length < maxItemLength ? s : `${s.slice(0, maxItemLength - 3)}...`
-);
+const ellipses = (s: string) =>
+  s.length < maxItemLength ? s : `${s.slice(0, maxItemLength - 3)}...`;
 
 const onAdd = () => {
   $q.dialog({
@@ -52,10 +51,17 @@ const onAdd = () => {
               />
             </q-item-section>
           </q-item>
-          <q-item v-for="list in todoStore.todoLists" clickable v-ripple :key="list.id">
+          <q-item
+            v-for="list in todoStore.todoLists"
+            clickable
+            v-ripple
+            :key="list.id"
+          >
             <q-item-section>
               <q-item-label class="text-h">{{ list.name }}</q-item-label>
-              <q-item-label caption>{{ ellipses('List first 3 items with ellipses here') }}</q-item-label>
+              <q-item-label caption>{{
+                ellipses('List first 3 items with ellipses here')
+              }}</q-item-label>
             </q-item-section>
           </q-item>
         </q-list>

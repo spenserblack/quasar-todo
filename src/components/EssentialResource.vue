@@ -8,21 +8,15 @@ withDefaults(defineProps<EssentialResourceProps>(), {
   icon: '',
 });
 const emit = defineEmits<{
-  (e: 'click'): void,
+  (e: 'click'): void;
 }>();
 
 const onClick = () => emit('click');
 </script>
 
 <template>
-  <q-item
-    clickable
-    @click="onClick"
-  >
-    <q-item-section
-      v-if="icon"
-      avatar
-    >
+  <q-item clickable @click="onClick">
+    <q-item-section v-if="icon" avatar>
       <q-icon :name="icon" />
     </q-item-section>
 

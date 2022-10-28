@@ -1,7 +1,10 @@
 import { shell, ipcMain } from 'electron';
 import { getDbPath, TodoList } from './db';
 import * as keys from './electron-ipc-keys';
-import type { IpcMainEvent as Event, IpcMainInvokeEvent as InvokeEvent } from 'electron';
+import type {
+  IpcMainEvent as Event,
+  IpcMainInvokeEvent as InvokeEvent,
+} from 'electron';
 import type { Model } from 'sequelize';
 
 function openWithBrowser(_event: Event, url: string) {

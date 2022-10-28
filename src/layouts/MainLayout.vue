@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import { useQuasar } from 'quasar';
-import EssentialLink, { EssentialLinkProps } from 'components/EssentialLink.vue';
+import EssentialLink, {
+  EssentialLinkProps,
+} from 'components/EssentialLink.vue';
 import EssentialResource from 'components/EssentialResource.vue';
 import { showDbFile } from '../api';
 import { saveTheme } from '../util';
@@ -20,7 +22,9 @@ const isDark = computed({
 const toggleDark = () => {
   isDark.value = !isDark.value;
 };
-const toggleDarkIcon = computed(() => `${isDark.value ? 'light' : 'dark'}_mode`);
+const toggleDarkIcon = computed(
+  () => `${isDark.value ? 'light' : 'dark'}_mode`
+);
 
 const essentialLinks: EssentialLinkProps[] = [
   {
@@ -31,10 +35,10 @@ const essentialLinks: EssentialLinkProps[] = [
   },
 ];
 
-const leftDrawerOpen = ref(false)
+const leftDrawerOpen = ref(false);
 
 function toggleLeftDrawer() {
-  leftDrawerOpen.value = !leftDrawerOpen.value
+  leftDrawerOpen.value = !leftDrawerOpen.value;
 }
 </script>
 
@@ -51,32 +55,22 @@ function toggleLeftDrawer() {
           @click="toggleLeftDrawer"
         />
 
-        <q-toolbar-title>
-          Quasar Todo
-        </q-toolbar-title>
+        <q-toolbar-title> Quasar Todo </q-toolbar-title>
 
         <q-btn
-            flat
-            dense
-            round
-            :icon="toggleDarkIcon"
-            aria-label="Toggle Dark Mode"
-            @click="toggleDark"
+          flat
+          dense
+          round
+          :icon="toggleDarkIcon"
+          aria-label="Toggle Dark Mode"
+          @click="toggleDark"
         />
       </q-toolbar>
     </q-header>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-    >
+    <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
       <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links &amp; Resources
-        </q-item-label>
+        <q-item-label header> Essential Links &amp; Resources </q-item-label>
 
         <EssentialResource
           class="electron-only"

@@ -3,7 +3,7 @@ const themeKey = 'dark-theme';
 export function loadTheme(): boolean | 'auto' {
   const theme = window?.localStorage?.getItem(themeKey);
 
-  switch(theme) {
+  switch (theme) {
     case 'true':
       return true;
     case 'false':

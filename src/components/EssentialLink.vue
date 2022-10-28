@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed } from 'vue';
 import { openExternalLink, isElectron } from '../api';
 
 export interface EssentialLinkProps {
@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<EssentialLinkProps>(), {
 
 const tag = isElectron ? 'button' : 'a';
 const target = isElectron ? undefined : '_blank';
-const href = computed(() => isElectron ? '#' : props.link);
+const href = computed(() => (isElectron ? '#' : props.link));
 </script>
 
 <template>
@@ -27,10 +27,7 @@ const href = computed(() => isElectron ? '#' : props.link);
     :href="href"
     @click="openExternalLink(props.link)"
   >
-    <q-item-section
-      v-if="icon"
-      avatar
-    >
+    <q-item-section v-if="icon" avatar>
       <q-icon :name="icon" />
     </q-item-section>
 

@@ -25,15 +25,22 @@ const localStorageKey = 'todoLists';
 let cachedLocalStorageLists: TodoList[];
 cachedLocalStorageLists = listsFromLocalStorage();
 function listsFromLocalStorage(): TodoList[] {
-  cachedLocalStorageLists = JSON.parse(localStorage.getItem(localStorageKey) || '[]');
+  cachedLocalStorageLists = JSON.parse(
+    localStorage.getItem(localStorageKey) || '[]'
+  );
   return cachedLocalStorageLists;
 }
 
 function addListToLocalStorage(name: string): TodoList {
-  const { id } = cachedLocalStorageLists[cachedLocalStorageLists.length - 1] ?? { id: 0 };
+  const { id } = cachedLocalStorageLists[
+    cachedLocalStorageLists.length - 1
+  ] ?? { id: 0 };
   const newList = { name, id: id + 1 };
   cachedLocalStorageLists.push(newList);
-  localStorage.setItem(localStorageKey, JSON.stringify(cachedLocalStorageLists));
+  localStorage.setItem(
+    localStorageKey,
+    JSON.stringify(cachedLocalStorageLists)
+  );
   return newList;
 }
 
