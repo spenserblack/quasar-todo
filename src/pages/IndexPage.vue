@@ -1,11 +1,32 @@
 <script setup lang="ts">
+import { useQuasar } from 'quasar';
 import { useTodoStore } from '../stores/todo-store';
+
+const $q = useQuasar();
 
 const todoStore = useTodoStore();
 const maxItemLength = 50;
 const ellipses = (s: string) => (
   s.length < maxItemLength ? s : `${s.slice(0, maxItemLength - 3)}...`
 );
+
+const onAdd = () => {
+  $q.dialog({
+    title: 'Add a todo list',
+    message: 'What is the name of the todo list?',
+    prompt: {
+      model: '',
+      type: 'text',
+      isValid: (name) => !!name,
+      label: 'Todo List Name',
+    },
+    cancel: true,
+    persistent: false,
+    color: 'secondary',
+  }).onOk(async (name) => {
+    await todoStore.addTodoList(name);
+  });
+};
 </script>
 
 <template>
@@ -18,6 +39,19 @@ const ellipses = (s: string) => (
     <div class="row items-center justify-evenly">
       <div class="col-xs-12 col-md-6">
         <q-list separator>
+          <q-item>
+            <q-item-section>
+              <q-btn
+                icon="add"
+                color="primary"
+                glossy
+                unelevated
+                ripple
+                aria-label="Add a todo list"
+                @click="onAdd"
+              />
+            </q-item-section>
+          </q-item>
           <q-item v-for="list in todoStore.todoLists" clickable v-ripple :key="list.id">
             <q-item-section>
               <q-item-label class="text-h">{{ list.name }}</q-item-label>
