@@ -53,6 +53,7 @@ const onAdd = () => {
           </q-item>
           <q-item
             v-for="list in todoStore.todoLists"
+            :to="`/todo-list/${list.id}`"
             clickable
             v-ripple
             :key="list.id"

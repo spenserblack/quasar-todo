@@ -7,6 +7,16 @@ export const useTodoStore = defineStore('todo', {
   state: () => ({
     todoLists: [] as TodoList[],
   }),
+  getters: {
+    listsById: (state) =>
+      state.todoLists.reduce<Record<string, TodoList>>(
+        (rec, list) => ({
+          [list.id.toString(10)]: list,
+          ...rec,
+        }),
+        {}
+      ),
+  },
   actions: {
     /**
      * Refreshes the todo lists from the database.
