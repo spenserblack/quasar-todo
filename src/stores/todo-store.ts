@@ -41,6 +41,6 @@ export const useTodoStore = defineStore('todo', {
       this.todoLists.splice(index, 1);
 
       return todoList;
-    }
+    },
   },
 });

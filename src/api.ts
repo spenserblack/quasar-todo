@@ -21,7 +21,8 @@ export const openExternalLink = electron?.openWithBrowser ?? noop;
 export const showDbFile = electron?.showDbFile ?? noop;
 export const getTodoLists = electron?.getTodoLists ?? listsFromLocalStorage;
 export const addTodoList = electron?.addTodoList ?? addListToLocalStorage;
-export const deleteTodoList = electron?.deleteTodoList ?? deleteListFromLocalStorage;
+export const deleteTodoList =
+  electron?.deleteTodoList ?? deleteListFromLocalStorage;
 
 const localStorageKey = 'todoLists';
 let cachedLocalStorageLists: TodoList[];
