@@ -6,4 +6,5 @@ contextBridge.exposeInMainWorld('electronAPI', {
   showDbFile: () => ipcRenderer.send(keys.showDbFile),
   getTodoLists: () => ipcRenderer.invoke(keys.getTodoLists),
   addTodoList: (title: string) => ipcRenderer.invoke(keys.addTodoList, title),
+  deleteTodoList: (id: number) => ipcRenderer.invoke(keys.deleteTodoList, id),
 });

@@ -5,6 +5,7 @@ export interface ElectronAPI {
   showDbFile(): void;
   getTodoLists(): Promise<TodoList[]>;
   addTodoList(name: string): Promise<TodoList>;
+  deleteTodoList(id: number): Promise<TodoList>;
 }
 
 declare global {
@@ -20,6 +21,7 @@ export const openExternalLink = electron?.openWithBrowser ?? noop;
 export const showDbFile = electron?.showDbFile ?? noop;
 export const getTodoLists = electron?.getTodoLists ?? listsFromLocalStorage;
 export const addTodoList = electron?.addTodoList ?? addListToLocalStorage;
+export const deleteTodoList = electron?.deleteTodoList ?? deleteListFromLocalStorage;
 
 const localStorageKey = 'todoLists';
 let cachedLocalStorageLists: TodoList[];
@@ -39,6 +41,14 @@ function addListToLocalStorage(name: string): TodoList {
   cachedLocalStorageLists.push(newList);
   saveCachedLocalStorageLists();
   return newList;
+}
+
+function deleteListFromLocalStorage(id: number): TodoList {
+  const index = cachedLocalStorageLists.findIndex((l) => l.id === id);
+  const deletedList = cachedLocalStorageLists.splice(index, 1)[0];
+
+  saveCachedLocalStorageLists();
+  return deletedList;
 }
 
 function saveCachedLocalStorageLists(): void {

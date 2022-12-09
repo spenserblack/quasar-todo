@@ -25,9 +25,20 @@ async function addTodoList(_event: InvokeEvent, name: string) {
   return todoList.toJSON();
 }
 
+async function deleteTodoList(_event: InvokeEvent, id: number) {
+  const todoList = await TodoList.findByPk(id);
+  if (todoList == null) {
+    throw new Error(`TodoList with id ${id} not found`);
+  }
+
+  await todoList.destroy();
+  return todoList.toJSON();
+}
+
 export default function setup() {
   ipcMain.on(keys.openWithBrowser, openWithBrowser);
   ipcMain.on(keys.showDbFile, showDbFile);
   ipcMain.handle(keys.getTodoLists, getTodoLists);
   ipcMain.handle(keys.addTodoList, addTodoList);
+  ipcMain.handle(keys.deleteTodoList, deleteTodoList);
 }

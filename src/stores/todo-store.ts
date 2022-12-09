@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { getTodoLists, addTodoList } from '../api';
+import * as api from '../api';
 import type { TodoList } from '../models';
 
 // TODO: Set store asynchronously (probably needs to be done in App.vue)
@@ -22,12 +22,25 @@ export const useTodoStore = defineStore('todo', {
      * Refreshes the todo lists from the database.
      */
     async refreshTodoLists() {
-      const todoLists = await getTodoLists();
+      const todoLists = await api.getTodoLists();
       this.todoLists.splice(0, this.todoLists.length, ...todoLists);
     },
     async addTodoList(name: string) {
-      const todoList = await addTodoList(name);
+      const todoList = await api.addTodoList(name);
       this.todoLists.push(todoList);
     },
+    /**
+     * Deletes a todo list.
+     *
+     * @param id The ID of the todo list to delete.
+     */
+    async deleteTodoList(id: number) {
+      const todoList = await api.deleteTodoList(id);
+
+      const index = this.todoLists.findIndex((list) => list.id === todoList.id);
+      this.todoLists.splice(index, 1);
+
+      return todoList;
+    }
   },
 });
