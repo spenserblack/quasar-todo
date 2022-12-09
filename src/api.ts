@@ -37,11 +37,15 @@ function addListToLocalStorage(name: string): TodoList {
   ] ?? { id: 0 };
   const newList = { name, id: id + 1 };
   cachedLocalStorageLists.push(newList);
+  saveCachedLocalStorageLists();
+  return newList;
+}
+
+function saveCachedLocalStorageLists(): void {
   localStorage.setItem(
     localStorageKey,
     JSON.stringify(cachedLocalStorageLists)
   );
-  return newList;
 }
 
 function noop() {
