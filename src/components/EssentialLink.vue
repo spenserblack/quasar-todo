@@ -14,7 +14,6 @@ const props = withDefaults(defineProps<EssentialLinkProps>(), {
   icon: '',
 });
 
-const tag = isElectron ? 'button' : 'a';
 const target = isElectron ? undefined : '_blank';
 const href = computed(() => (isElectron ? '#' : props.link));
 </script>
