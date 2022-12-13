@@ -33,6 +33,24 @@ const onDelete = () => {
     });
   });
 };
+
+const onEditTitle = () => {
+  $q.dialog({
+    title: 'Edit name',
+    message: 'Enter a new name for the list',
+    prompt: {
+      model: todo.value.name,
+      type: 'text',
+      isValid: (name) => !!name,
+      label: 'Todo List Name',
+    },
+    cancel: true,
+    persistent: false,
+    color: 'secondary',
+  }).onOk(async (name) => {
+    await todoStore.editTodoListName(todo.value.id, name);
+  });
+};
 </script>
 
 <template>
@@ -43,13 +61,22 @@ const onDelete = () => {
         <h1 class="text-h2">{{ todo.name }}</h1>
       </div>
       <div class="col-2">
-        <q-btn
-          icon="delete_forever"
-          color="negative"
-          aria-label="Delete list"
-          @click="onDelete"
-          glossy
-        />
+        <q-btn-group>
+          <q-btn
+            icon="edit"
+            color="secondary"
+            aria-label="Edit title"
+            @click="onEditTitle"
+            glossy
+          />
+          <q-btn
+            icon="delete_forever"
+            color="negative"
+            aria-label="Delete list"
+            @click="onDelete"
+            glossy
+          />
+        </q-btn-group>
       </div>
     </div>
   </q-page>

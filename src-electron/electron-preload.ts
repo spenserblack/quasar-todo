@@ -7,4 +7,6 @@ contextBridge.exposeInMainWorld('electronAPI', {
   getTodoLists: () => ipcRenderer.invoke(keys.getTodoLists),
   addTodoList: (title: string) => ipcRenderer.invoke(keys.addTodoList, title),
   deleteTodoList: (id: number) => ipcRenderer.invoke(keys.deleteTodoList, id),
+  editTodoListTitle: (id: number, title: string) =>
+    ipcRenderer.invoke(keys.editTodoListTitle, id, title),
 });

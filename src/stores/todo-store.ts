@@ -42,5 +42,16 @@ export const useTodoStore = defineStore('todo', {
 
       return todoList;
     },
+    /**
+     * Edits a todo list's name/title.
+     *
+     * @param id the ID of the todo list to edit.
+     * @param title the new title of the todo list.
+     */
+    async editTodoListName(id: number, title: string) {
+      const todoList = await api.editTodoListTitle(id, title);
+      const index = this.todoLists.findIndex((list) => list.id === todoList.id);
+      this.todoLists.splice(index, 1, todoList);
+    },
   },
 });
