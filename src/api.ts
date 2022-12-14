@@ -86,6 +86,16 @@ function itemsFromLocalStorage(): Record<string, TodoItem[]> {
   return cachedLocalStorageItems;
 }
 
+function addItemToLocalStorage(listId: number, content: string): TodoItem {
+  const items = cachedLocalStorageItems[listId] ?? [];
+  const { id } = items[items.length - 1] ?? { id: 0 };
+  const newItem = { id: id + 1, listId, content, done: false };
+  items.push(newItem);
+  cachedLocalStorageItems[listId] = items;
+  saveCachedLocalStorageItems();
+  return newItem;
+}
+
 function saveCachedLocalStorageItems(): void {
   localStorage.setItem(
     localStorageItemKey,
