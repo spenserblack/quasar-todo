@@ -50,9 +50,9 @@ async function editTodoListTitle(
   return todoList.toJSON();
 }
 
-async function getTodoItems(_event: InvokeEvent, todoListId: number, limit?: number) {
+async function getTodoItems(_event: InvokeEvent, todoListId: number, done?: boolean, limit?: number) {
   const todoItems = await TodoItem.findAll({
-    where: { todoListId },
+    where: { todoListId, done },
     limit,
   });
   return todoItems.map((todoItem: Model) => todoItem.toJSON());
