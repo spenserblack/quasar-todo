@@ -50,15 +50,21 @@ async function editTodoListTitle(
   return todoList.toJSON();
 }
 
-async function getTodoItems(_event: InvokeEvent, todoListId: number, done?: boolean, limit?: number) {
-  const where: { listId: number, done?: boolean } = { listId: todoListId };
+async function getTodoItems(_event: InvokeEvent, todoListId: number, opts: { done?: boolean, limit?: number } = {}) {
+  const { limit, done } = opts;
+  const queryOpts: {
+    where: { listId: number, done?: boolean },
+    limit?: number,
+  } = { where: { listId: todoListId } };
+
   if (done != null) {
-    where.done = done;
+    queryOpts.where.done = done;
   }
-  const todoItems = await TodoItem.findAll({
-    where,
-    limit,
-  });
+  if (limit != null) {
+    queryOpts.limit = limit;
+  }
+
+  const todoItems = await TodoItem.findAll(queryOpts);
   return todoItems.map((todoItem: Model) => todoItem.toJSON());
 }
 
