@@ -1,4 +1,4 @@
-import type { TodoList } from './models';
+import type { TodoList, TodoItem } from './models';
 
 export interface ElectronAPI {
   openWithBrowser(url: string): void;
@@ -7,6 +7,7 @@ export interface ElectronAPI {
   addTodoList(name: string): Promise<TodoList>;
   deleteTodoList(id: number): Promise<TodoList>;
   editTodoListTitle(id: number, title: string): Promise<TodoList>;
+  getTodoItems(listId: number, limit?: number): Promise<TodoItem[]>;
 }
 
 declare global {
@@ -26,13 +27,14 @@ export const deleteTodoList =
   electron?.deleteTodoList ?? deleteListFromLocalStorage;
 export const editTodoListTitle =
   electron?.editTodoListTitle ?? editListTitleFromLocalStorage;
+export const getTodoItems = electron?.getTodoItems ?? itemsFromLocalStorage;
 
-const localStorageKey = 'todoLists';
+const localStorageListKey = 'todoLists';
 let cachedLocalStorageLists: TodoList[];
 cachedLocalStorageLists = listsFromLocalStorage();
 function listsFromLocalStorage(): TodoList[] {
   cachedLocalStorageLists = JSON.parse(
-    localStorage.getItem(localStorageKey) || '[]'
+    localStorage.getItem(localStorageListKey) || '[]'
   );
   return cachedLocalStorageLists;
 }
@@ -68,8 +70,26 @@ function editListTitleFromLocalStorage(id: number, title: string): TodoList {
 
 function saveCachedLocalStorageLists(): void {
   localStorage.setItem(
-    localStorageKey,
+    localStorageListKey,
     JSON.stringify(cachedLocalStorageLists)
+  );
+}
+
+const localStorageItemKey = 'todoItems';
+// NOTE: Maps listId to TodoItem[]
+let cachedLocalStorageItems: Record<string, TodoItem[]>;
+cachedLocalStorageItems = itemsFromLocalStorage();
+function itemsFromLocalStorage(): Record<string, TodoItem[]> {
+  cachedLocalStorageItems = JSON.parse(
+    localStorage.getItem(localStorageItemKey) || '{}'
+  );
+  return cachedLocalStorageItems;
+}
+
+function saveCachedLocalStorageItems(): void {
+  localStorage.setItem(
+    localStorageItemKey,
+    JSON.stringify(cachedLocalStorageItems)
   );
 }
 

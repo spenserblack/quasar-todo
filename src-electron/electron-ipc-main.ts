@@ -1,5 +1,5 @@
 import { shell, ipcMain } from 'electron';
-import { getDbPath, TodoList } from './db';
+import { getDbPath, TodoList, TodoItem } from './db';
 import * as keys from './electron-ipc-keys';
 import type {
   IpcMainEvent as Event,
@@ -50,6 +50,14 @@ async function editTodoListTitle(
   return todoList.toJSON();
 }
 
+async function getTodoItems(_event: InvokeEvent, todoListId: number, limit?: number) {
+  const todoItems = await TodoItem.findAll({
+    where: { todoListId },
+    limit,
+  });
+  return todoItems.map((todoItem: Model) => todoItem.toJSON());
+}
+
 export default function setup() {
   ipcMain.on(keys.openWithBrowser, openWithBrowser);
   ipcMain.on(keys.showDbFile, showDbFile);
@@ -57,4 +65,5 @@ export default function setup() {
   ipcMain.handle(keys.addTodoList, addTodoList);
   ipcMain.handle(keys.deleteTodoList, deleteTodoList);
   ipcMain.handle(keys.editTodoListTitle, editTodoListTitle);
+  ipcMain.handle(keys.getTodoItems, getTodoItems);
 }
