@@ -20,4 +20,21 @@ export const TodoList = db.define('todolist', {
   name: DataTypes.TEXT,
 });
 
+export const TodoItem = db.define('todoitem', {
+  content: DataTypes.TEXT,
+  done: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+  },
+});
+
+TodoList.hasMany(TodoItem, {
+  foreignKey: 'listId',
+  as: 'items',
+});
+TodoItem.belongsTo(TodoList, {
+  foreignKey: 'listId',
+  as: 'list',
+});
+
 export default db;
