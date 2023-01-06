@@ -3,6 +3,7 @@ import { useQuasar } from 'quasar';
 import { computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useTodoStore } from '../stores/todo-store';
+// TODO: MouseoverFab.vue to create new list items? Pop up modal to create new items?
 
 const $q = useQuasar();
 
