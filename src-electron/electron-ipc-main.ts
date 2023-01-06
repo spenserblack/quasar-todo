@@ -50,11 +50,15 @@ async function editTodoListTitle(
   return todoList.toJSON();
 }
 
-async function getTodoItems(_event: InvokeEvent, todoListId: number, opts: { done?: boolean, limit?: number } = {}) {
+async function getTodoItems(
+  _event: InvokeEvent,
+  todoListId: number,
+  opts: { done?: boolean; limit?: number } = {}
+) {
   const { limit, done } = opts;
   const queryOpts: {
-    where: { listId: number, done?: boolean },
-    limit?: number,
+    where: { listId: number; done?: boolean };
+    limit?: number;
   } = { where: { listId: todoListId } };
 
   if (done != null) {
