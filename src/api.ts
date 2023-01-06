@@ -7,7 +7,10 @@ export interface ElectronAPI {
   addTodoList(name: string): Promise<TodoList>;
   deleteTodoList(id: number): Promise<TodoList>;
   editTodoListTitle(id: number, title: string): Promise<TodoList>;
-  getTodoItems(listId: number, opts: { done?: boolean, limit?: number }): Promise<TodoItem[]>;
+  getTodoItems(
+    listId: number,
+    opts?: { done?: boolean; limit?: number }
+  ): Promise<TodoItem[]>;
 }
 
 declare global {
@@ -27,7 +30,8 @@ export const deleteTodoList =
   electron?.deleteTodoList ?? deleteListFromLocalStorage;
 export const editTodoListTitle =
   electron?.editTodoListTitle ?? editListTitleFromLocalStorage;
-export const getTodoItems = electron?.getTodoItems ?? getTodoItemsFromLocalStorage;
+export const getTodoItems =
+  electron?.getTodoItems ?? getTodoItemsFromLocalStorage;
 
 const localStorageListKey = 'todoLists';
 let cachedLocalStorageLists: TodoList[];
@@ -86,10 +90,14 @@ function itemsFromLocalStorage(): Record<string, TodoItem[]> {
   return cachedLocalStorageItems;
 }
 
-function getTodoItemsFromLocalStorage(listId: number, opts: { done?: boolean, limit?: number } = {}): TodoItem[] {
+function getTodoItemsFromLocalStorage(
+  listId: number,
+  opts: { done?: boolean; limit?: number } = {}
+): TodoItem[] {
   const { done, limit } = opts;
   const items = cachedLocalStorageItems[listId] ?? [];
-  const filteredItems = done != null ? items.filter((i) => i.done === done) : items;
+  const filteredItems =
+    done != null ? items.filter((i) => i.done === done) : items;
   return limit ? filteredItems.slice(0, limit) : filteredItems;
 }
 
