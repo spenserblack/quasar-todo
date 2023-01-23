@@ -12,7 +12,7 @@ const router = useRouter();
 const todoStore = useTodoStore();
 
 const todo = computed(() => todoStore.listsById[route.params.id]);
-const loadingItems = computed(() => !todo.value?.items?.length);
+const loadingItems = computed(() => todo.value?.items == null);
 
 const onDelete = () => {
   $q.dialog({
