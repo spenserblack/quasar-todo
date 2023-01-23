@@ -72,7 +72,11 @@ async function getTodoItems(
   return todoItems.map((todoItem: Model) => todoItem.toJSON());
 }
 
-async function addTodoItem(_event: InvokeEvent, todoListId: number, content: string) {
+async function addTodoItem(
+  _event: InvokeEvent,
+  todoListId: number,
+  content: string
+) {
   const todoItem = await TodoItem.create({ listId: todoListId, content });
   return todoItem.toJSON();
 }

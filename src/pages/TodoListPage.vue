@@ -117,7 +117,15 @@ onMounted(async () => {
         <q-list v-else separator>
           <q-item>
             <q-item-section>
-              <q-btn icon="add" color="secondary" glossy unelevated ripple aria-label="Add a todo item" @click="onAdd" />
+              <q-btn
+                icon="add"
+                color="secondary"
+                glossy
+                unelevated
+                ripple
+                aria-label="Add a todo item"
+                @click="onAdd"
+              />
             </q-item-section>
           </q-item>
           <q-item v-for="item in todo.items" :key="item.id">
@@ -126,9 +134,24 @@ onMounted(async () => {
             </q-item-section>
             <q-item-section side>
               <q-btn-group>
-                <q-btn color="positive" icon="done" aria-label="Mark as done" disabled />
-                <q-btn icon="edit" color="secondary" aria-label="Edit item" disabled />
-                <q-btn icon="delete_forever" color="negative" aria-label="Delete item" disabled />
+                <q-btn
+                  color="positive"
+                  icon="done"
+                  aria-label="Mark as done"
+                  disabled
+                />
+                <q-btn
+                  icon="edit"
+                  color="secondary"
+                  aria-label="Edit item"
+                  disabled
+                />
+                <q-btn
+                  icon="delete_forever"
+                  color="negative"
+                  aria-label="Delete item"
+                  disabled
+                />
               </q-btn-group>
             </q-item-section>
           </q-item>

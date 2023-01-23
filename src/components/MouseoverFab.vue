@@ -12,5 +12,10 @@ const onMouseLeave = () => {
 </script>
 
 <template>
-  <q-fab v-bind="$attrs" hide-label="!isHovering" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave" />
+  <q-fab
+    v-bind="$attrs"
+    hide-label="!isHovering"
+    @mouseenter="onMouseEnter"
+    @mouseleave="onMouseLeave"
+  />
 </template>

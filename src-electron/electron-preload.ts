@@ -13,5 +13,6 @@ contextBridge.exposeInMainWorld('electronAPI', {
     todoListId: number,
     opts: { done?: boolean; limit?: number } = {}
   ) => ipcRenderer.invoke(keys.getTodoItems, todoListId, opts),
-  addTodoItem: (todoListId: number, content: string) => ipcRenderer.invoke(keys.addTodoItem, todoListId, content),
+  addTodoItem: (todoListId: number, content: string) =>
+    ipcRenderer.invoke(keys.addTodoItem, todoListId, content),
 });
