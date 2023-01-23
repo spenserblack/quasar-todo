@@ -194,7 +194,18 @@ module.exports = configure(function (/* ctx */) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: 'quasar-todo',
+        appId: 'com.electron.quasar-todo',
+        nsis: {
+          oneClick: false,
+          perMachine: false,
+          allowToChangeInstallationDirectory: true,
+          shortcutName: 'Quasar Todo',
+        },
+        win: { target: 'nsis' },
+        linux: {
+          target: 'AppImage',
+          category: 'Utility',
+        },
       },
     },
 
