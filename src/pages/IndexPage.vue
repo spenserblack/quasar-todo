@@ -50,7 +50,7 @@ onMounted(async () => {
   const promises = todoStore.todoLists.map(async (todoList, todoListIndex) => {
     const items = await todoStore.getTodoListItems(
       todoList.id,
-      { done: true, limit: 3 },
+      { done: false, limit: 3 },
       true
     );
     todoItems.value[todoListIndex] = items;
