@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useQuasar } from 'quasar';
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useTodoStore } from '../stores/todo-store';
 // TODO: MouseoverFab.vue to create new list items? Pop up modal to create new items?
@@ -12,6 +12,7 @@ const router = useRouter();
 const todoStore = useTodoStore();
 
 const todo = computed(() => todoStore.listsById[route.params.id]);
+const loadingItems = computed(() => !todo.value?.items?.length);
 
 const onDelete = () => {
   $q.dialog({
@@ -70,6 +71,10 @@ const onAdd = () => {
     await todoStore.addTodoListItem(todo.value.id, content);
   });
 };
+
+onMounted(async () => {
+  await todoStore.getTodoListItems(todo.value.id);
+});
 </script>
 
 <template>
@@ -100,10 +105,31 @@ const onAdd = () => {
     </div>
     <div class="row items-center justify-evenly">
       <div class="col-xs-12 col-md-6">
-        <q-list separator>
+        <q-list v-if="loadingItems">
+          <q-item v-for="i in 3" :key="i">
+            <q-item-section>
+              <q-item-label>
+                <q-skeleton />
+              </q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-list>
+        <q-list v-else separator>
           <q-item>
             <q-item-section>
               <q-btn icon="add" color="secondary" glossy unelevated ripple aria-label="Add a todo item" @click="onAdd" />
+            </q-item-section>
+          </q-item>
+          <q-item v-for="item in todo.items" :key="item.id">
+            <q-item-section>
+              <q-item-label>{{ item.content }}</q-item-label>
+            </q-item-section>
+            <q-item-section side>
+              <q-btn-group>
+                <q-btn color="positive" icon="done" aria-label="Mark as done" disabled />
+                <q-btn icon="edit" color="secondary" aria-label="Edit item" disabled />
+                <q-btn icon="delete_forever" color="negative" aria-label="Delete item" disabled />
+              </q-btn-group>
             </q-item-section>
           </q-item>
         </q-list>
