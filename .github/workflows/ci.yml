@@ -38,6 +38,6 @@ jobs:
         cache: yarn
     - run: yarn install --frozen-lockfile
     - run: yarn build
-    - run: yarn build-electron
+    - run: yarn build-electron -P onTagOrDraft
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

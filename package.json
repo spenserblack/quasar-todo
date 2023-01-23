@@ -9,7 +9,7 @@
     "dev": "quasar dev",
     "dev-electron": "quasar dev -m electron",
     "build": "quasar build",
-    "build-electron": "quasar build -m electron -P onTagOrDraft",
+    "build-electron": "quasar build -m electron",
     "build-all": "yarn build && yarn build-electron",
     "lint": "eslint --ext .js,.ts,.vue ./",
     "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
