@@ -72,6 +72,11 @@ async function getTodoItems(
   return todoItems.map((todoItem: Model) => todoItem.toJSON());
 }
 
+async function addTodoItem(_event: InvokeEvent, todoListId: number, content: string) {
+  const todoItem = await TodoItem.create({ listId: todoListId, content });
+  return todoItem.toJSON();
+}
+
 export default function setup() {
   ipcMain.on(keys.openWithBrowser, openWithBrowser);
   ipcMain.on(keys.showDbFile, showDbFile);
@@ -80,4 +85,5 @@ export default function setup() {
   ipcMain.handle(keys.deleteTodoList, deleteTodoList);
   ipcMain.handle(keys.editTodoListTitle, editTodoListTitle);
   ipcMain.handle(keys.getTodoItems, getTodoItems);
+  ipcMain.handle(keys.addTodoItem, addTodoItem);
 }

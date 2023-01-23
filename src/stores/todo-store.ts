@@ -90,5 +90,23 @@ export const useTodoStore = defineStore('todo', {
 
       return items;
     },
+
+    /**
+     * Adds a todo list item.
+     *
+     * @param id the ID of the todo list to add an item to.
+     * @param content the content of the todo list item.
+     */
+    async addTodoListItem(id: number, content: string) {
+      const todoItem = await api.addTodoItem(id, content);
+      const todoList = this.todoLists.find((list) => list.id === id);
+      if (!todoList) {
+        throw new Error('No todo list');
+      }
+      if (todoList.items == null) {
+        todoList.items = [];
+      }
+      todoList.items.push(todoItem);
+    },
   },
 });

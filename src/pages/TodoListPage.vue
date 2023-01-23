@@ -52,6 +52,24 @@ const onEditTitle = () => {
     await todoStore.editTodoListName(todo.value.id, name);
   });
 };
+
+const onAdd = () => {
+  $q.dialog({
+    title: `Add an item to ${todo.value.name}`,
+    message: 'Enter a new item for the list',
+    prompt: {
+      model: '',
+      type: 'text',
+      isValid: (content) => !!content,
+      label: 'Todo Item Text',
+    },
+    cancel: true,
+    persistent: false,
+    color: 'secondary',
+  }).onOk(async (content) => {
+    await todoStore.addTodoListItem(todo.value.id, content);
+  });
+};
 </script>
 
 <template>
@@ -78,6 +96,17 @@ const onEditTitle = () => {
             glossy
           />
         </q-btn-group>
+      </div>
+    </div>
+    <div class="row items-center justify-evenly">
+      <div class="col-xs-12 col-md-6">
+        <q-list separator>
+          <q-item>
+            <q-item-section>
+              <q-btn icon="add" color="secondary" glossy unelevated ripple aria-label="Add a todo item" @click="onAdd" />
+            </q-item-section>
+          </q-item>
+        </q-list>
       </div>
     </div>
   </q-page>

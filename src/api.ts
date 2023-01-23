@@ -11,6 +11,7 @@ export interface ElectronAPI {
     listId: number,
     opts?: { done?: boolean; limit?: number }
   ): Promise<TodoItem[]>;
+  addTodoItem(listId: number, content: string): Promise<TodoItem>;
 }
 
 declare global {
@@ -32,6 +33,7 @@ export const editTodoListTitle =
   electron?.editTodoListTitle ?? editListTitleFromLocalStorage;
 export const getTodoItems =
   electron?.getTodoItems ?? getTodoItemsFromLocalStorage;
+export const addTodoItem = electron?.addTodoItem ?? addItemToLocalStorage;
 
 const localStorageListKey = 'todoLists';
 let cachedLocalStorageLists: TodoList[];
