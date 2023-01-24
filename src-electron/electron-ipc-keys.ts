@@ -6,3 +6,4 @@ export const deleteTodoList = 'todo:delete';
 export const editTodoListTitle = 'todo:edit-title';
 export const getTodoItems = 'item:get';
 export const addTodoItem = 'item:add';
+export const completeTodoItem = 'item:complete';

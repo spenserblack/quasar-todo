@@ -12,6 +12,7 @@ export interface ElectronAPI {
     opts?: { done?: boolean; limit?: number }
   ): Promise<TodoItem[]>;
   addTodoItem(listId: number, content: string): Promise<TodoItem>;
+  completeTodoItem(id: number, done?: boolean): Promise<TodoItem>;
 }
 
 declare global {
@@ -34,6 +35,7 @@ export const editTodoListTitle =
 export const getTodoItems =
   electron?.getTodoItems ?? getTodoItemsFromLocalStorage;
 export const addTodoItem = electron?.addTodoItem ?? addItemToLocalStorage;
+export const completeTodoItem = electron?.completeTodoItem ?? completeTodoItemInLocalStorage;
 
 const localStorageListKey = 'todoLists';
 let cachedLocalStorageLists: TodoList[];
@@ -111,6 +113,18 @@ function addItemToLocalStorage(listId: number, content: string): TodoItem {
   cachedLocalStorageItems[listId] = items;
   saveCachedLocalStorageItems();
   return newItem;
+}
+
+function completeTodoItemInLocalStorage(id: number, done = true): TodoItem {
+  const items = Object.values(cachedLocalStorageItems).flat();
+  const item = items.find((i) => i.id === id);
+  if (item == null) {
+    throw new Error(`Item with id ${id} not found`);
+  }
+
+  item.done = done;
+  saveCachedLocalStorageItems();
+  return item;
 }
 
 function saveCachedLocalStorageItems(): void {

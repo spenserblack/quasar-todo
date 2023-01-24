@@ -72,6 +72,10 @@ const onAdd = () => {
   });
 };
 
+const markTodoItem = async (id: number, done: boolean) => {
+  await todoStore.markTodoItem(todo.value.id, id, done);
+};
+
 onMounted(async () => {
   await todoStore.getTodoListItems(todo.value.id);
 });
@@ -128,17 +132,17 @@ onMounted(async () => {
               />
             </q-item-section>
           </q-item>
-          <q-item v-for="item in todo.items" :key="item.id">
+          <q-item v-for="item in todo.items" :key="item.id" :class="item.done ? 'bg-positive' : ''">
             <q-item-section>
               <q-item-label>{{ item.content }}</q-item-label>
             </q-item-section>
             <q-item-section side>
               <q-btn-group>
                 <q-btn
-                  color="positive"
-                  icon="done"
-                  aria-label="Mark as done"
-                  disabled
+                  :color="item.done ? 'warning' : 'positive'"
+                  :icon="item.done ? 'remove_done' : 'done'"
+                  :aria-label="`Mark as ${item.done ? 'not done' : 'done'}`"
+                  @click="markTodoItem(item.id, !item.done)"
                 />
                 <q-btn
                   icon="edit"

@@ -108,5 +108,25 @@ export const useTodoStore = defineStore('todo', {
       }
       todoList.items.push(todoItem);
     },
+
+    /**
+     * Marks a todo item as complete.
+     *
+     * @param listId the ID of the todo list the item is in.
+     * @param itemId the ID of the todo item to mark as complete.
+     * @param done whether the item is done or not.
+     */
+    async markTodoItem(listId: number, itemId: number, done = true) {
+      const todoList = this.todoLists.find((list) => list.id === listId);
+      if (!todoList?.items == null) {
+        throw new Error('No todo list items');
+      }
+      const todoItem = todoList.items.find((item) => item.id === itemId);
+      if (!todoItem) {
+        throw new Error('No todo item');
+      }
+      todoItem.done = done;
+      await api.completeTodoItem(itemId, done);
+    },
   },
 });

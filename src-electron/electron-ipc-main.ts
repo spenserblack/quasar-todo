@@ -81,6 +81,16 @@ async function addTodoItem(
   return todoItem.toJSON();
 }
 
+async function completeTodoItem(_event: InvokeEvent, id: number, done = true) {
+  const todoItem = await TodoItem.findByPk(id);
+  if (todoItem == null) {
+    throw new Error(`TodoItem with id ${id} not found`);
+  }
+  todoItem.done = done;
+  await todoItem.save();
+  return todoItem.toJSON();
+}
+
 export default function setup() {
   ipcMain.on(keys.openWithBrowser, openWithBrowser);
   ipcMain.on(keys.showDbFile, showDbFile);
@@ -90,4 +100,5 @@ export default function setup() {
   ipcMain.handle(keys.editTodoListTitle, editTodoListTitle);
   ipcMain.handle(keys.getTodoItems, getTodoItems);
   ipcMain.handle(keys.addTodoItem, addTodoItem);
+  ipcMain.handle(keys.completeTodoItem, completeTodoItem);
 }
