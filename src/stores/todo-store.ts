@@ -128,5 +128,25 @@ export const useTodoStore = defineStore('todo', {
       todoItem.done = done;
       await api.completeTodoItem(itemId, done);
     },
+
+    /**
+     * Edits the content of a todo item.
+     *
+     * @param listId the ID of the todo list the item is in.
+     * @param itemId the ID of the todo item to edit.
+     * @param content the new content of the todo item.
+     */
+    async editTodoItemContent(listId: number, itemId: number, content: string) {
+      const todoList = this.todoLists.find((list) => list.id === listId);
+      if (!todoList?.items == null) {
+        throw new Error('No todo list items');
+      }
+      const todoItem = todoList.items.find((item) => item.id === itemId);
+      if (!todoItem) {
+        throw new Error('No todo item');
+      }
+      todoItem.content = content;
+      await api.editTodoItem(itemId, content);
+    }
   },
 });

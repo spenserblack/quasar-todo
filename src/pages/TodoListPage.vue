@@ -76,6 +76,24 @@ const markTodoItem = async (id: number, done: boolean) => {
   await todoStore.markTodoItem(todo.value.id, id, done);
 };
 
+const onEditTodoItem = async (id: number) => {
+  $q.dialog({
+    title: 'Edit item',
+    message: 'Enter new text for the item',
+    prompt: {
+      model: todo.value.items[id].content,
+      type: 'text',
+      isValid: (content) => !!content,
+      label: 'Todo Item Text',
+    },
+    cancel: true,
+    persistent: false,
+    color: 'secondary',
+  }).onOk(async (content) => {
+    await todoStore.editTodoItemContent(todo.value.id, id, content);
+  });
+};
+
 onMounted(async () => {
   await todoStore.getTodoListItems(todo.value.id);
 });
@@ -148,7 +166,7 @@ onMounted(async () => {
                   icon="edit"
                   color="secondary"
                   aria-label="Edit item"
-                  disabled
+                  @click="onEditTodoItem(item.id)"
                 />
                 <q-btn
                   icon="delete_forever"

@@ -7,3 +7,4 @@ export const editTodoListTitle = 'todo:edit-title';
 export const getTodoItems = 'item:get';
 export const addTodoItem = 'item:add';
 export const completeTodoItem = 'item:complete';
+export const editTodoItem = 'item:edit';

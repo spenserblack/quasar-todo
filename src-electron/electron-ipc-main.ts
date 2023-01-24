@@ -50,6 +50,14 @@ async function editTodoListTitle(
   return todoList.toJSON();
 }
 
+async function unsafeGetTodoItem(id: number) {
+  const todoItem = await TodoItem.findByPk(id);
+  if (todoItem == null) {
+    throw new Error(`TodoItem with id ${id} not found`);
+  }
+  return todoItem;
+}
+
 async function getTodoItems(
   _event: InvokeEvent,
   todoListId: number,
@@ -81,12 +89,17 @@ async function addTodoItem(
   return todoItem.toJSON();
 }
 
+
 async function completeTodoItem(_event: InvokeEvent, id: number, done = true) {
-  const todoItem = await TodoItem.findByPk(id);
-  if (todoItem == null) {
-    throw new Error(`TodoItem with id ${id} not found`);
-  }
+  const todoItem = await unsafeGetTodoItem(id);
   todoItem.done = done;
+  await todoItem.save();
+  return todoItem.toJSON();
+}
+
+async function editTodoItem(_event: InvokeEvent, id: number, content: string) {
+  const todoItem = await unsafeGetTodoItem(id);
+  todoItem.content = content;
   await todoItem.save();
   return todoItem.toJSON();
 }
@@ -101,4 +114,5 @@ export default function setup() {
   ipcMain.handle(keys.getTodoItems, getTodoItems);
   ipcMain.handle(keys.addTodoItem, addTodoItem);
   ipcMain.handle(keys.completeTodoItem, completeTodoItem);
+  ipcMain.handle(keys.editTodoItem, editTodoItem);
 }
