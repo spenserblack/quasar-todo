@@ -6,16 +6,22 @@
   "author": "Spenser Black",
   "private": true,
   "scripts": {
-    "dev": "quasar dev -m electron",
-    "build": "quasar build -m electron",
+    "dev": "quasar dev",
+    "dev-electron": "quasar dev -m electron",
+    "build": "quasar build",
+    "build-electron": "quasar build -m electron",
+    "build-all": "yarn build && yarn build-electron",
     "lint": "eslint --ext .js,.ts,.vue ./",
     "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
+    "format-check": "prettier --check \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
     "pinia": "^2.0.11",
     "quasar": "^2.6.0",
+    "sequelize": "^6.23.2",
+    "sqlite3": "^5.1.1",
     "vue": "^3.0.0",
     "vue-i18n": "^9.2.2",
     "vue-router": "^4.0.0"
@@ -29,7 +35,7 @@
     "@typescript-eslint/parser": "^5.10.0",
     "autoprefixer": "^10.4.2",
     "electron": "^20.1.1",
-    "electron-builder": "^22.4.0",
+    "electron-builder": "^23.6.0",
     "eslint": "^8.10.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-vue": "^9.0.0",

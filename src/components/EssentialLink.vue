@@ -1,14 +1,32 @@
+<script setup lang="ts">
+import { computed } from 'vue';
+import { openExternalLink, isElectron } from '../api';
+
+export interface EssentialLinkProps {
+  title: string;
+  caption?: string;
+  link?: string;
+  icon?: string;
+}
+const props = withDefaults(defineProps<EssentialLinkProps>(), {
+  caption: '',
+  link: '#',
+  icon: '',
+});
+
+const target = isElectron ? undefined : '_blank';
+const href = computed(() => (isElectron ? '#' : props.link));
+</script>
+
 <template>
   <q-item
     clickable
     tag="a"
-    target="_blank"
-    :href="link"
+    :target="target"
+    :href="href"
+    @click="openExternalLink(props.link)"
   >
-    <q-item-section
-      v-if="icon"
-      avatar
-    >
+    <q-item-section v-if="icon" avatar>
       <q-icon :name="icon" />
     </q-item-section>
 
@@ -18,17 +36,3 @@
     </q-item-section>
   </q-item>
 </template>
-
-<script setup lang="ts">
-export interface EssentialLinkProps {
-  title: string;
-  caption?: string;
-  link?: string;
-  icon?: string;
-}
-withDefaults(defineProps<EssentialLinkProps>(), {
-  caption: '',
-  link: '#',
-  icon: '',
-});
-</script>
