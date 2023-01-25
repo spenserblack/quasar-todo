@@ -94,6 +94,10 @@ const onEditTodoItem = async (id: number) => {
   });
 };
 
+const deleteTodoItem = async (id: number) => {
+  await todoStore.deleteTodoItem(todo.value.id, id);
+};
+
 onMounted(async () => {
   await todoStore.getTodoListItems(todo.value.id);
 });
@@ -172,7 +176,7 @@ onMounted(async () => {
                   icon="delete_forever"
                   color="negative"
                   aria-label="Delete item"
-                  disabled
+                  @click="deleteTodoItem(item.id)"
                 />
               </q-btn-group>
             </q-item-section>

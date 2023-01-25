@@ -8,3 +8,4 @@ export const getTodoItems = 'item:get';
 export const addTodoItem = 'item:add';
 export const completeTodoItem = 'item:complete';
 export const editTodoItem = 'item:edit';
+export const deleteTodoItem = 'item:delete';

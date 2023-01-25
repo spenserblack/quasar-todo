@@ -5,6 +5,7 @@ import type { TodoList, TodoItem } from '../models';
 type StoreTodoList = TodoList & { items?: TodoItem[] | null };
 
 // TODO: Set store asynchronously (probably needs to be done in App.vue)
+// TODO: Reduce repeated code
 export const useTodoStore = defineStore('todo', {
   state: () => ({
     todoLists: [] as null | StoreTodoList[],
@@ -147,6 +148,26 @@ export const useTodoStore = defineStore('todo', {
       }
       todoItem.content = content;
       await api.editTodoItem(itemId, content);
-    }
+    },
+
+    /**
+     * Deletes a todo item.
+     *
+     * @param listId the ID of the todo list the item is in.
+     * @param itemId the ID of the todo item to delete.
+     */
+    async deleteTodoItem(listId: number, itemId: number) {
+      const todoList = this.todoLists.find((list) => list.id === listId);
+      if (!todoList?.items == null) {
+        throw new Error('No todo list items');
+      }
+      const todoItem = todoList.items.find((item) => item.id === itemId);
+      if (!todoItem) {
+        throw new Error('No todo item');
+      }
+      const index = todoList.items.indexOf(todoItem);
+      todoList.items.splice(index, 1);
+      await api.deleteTodoItem(itemId);
+    },
   },
 });

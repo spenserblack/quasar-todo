@@ -104,6 +104,12 @@ async function editTodoItem(_event: InvokeEvent, id: number, content: string) {
   return todoItem.toJSON();
 }
 
+async function deleteTodoItem(_event: InvokeEvent, id: number) {
+  const todoItem = await unsafeGetTodoItem(id);
+  await todoItem.destroy();
+  return todoItem.toJSON();
+}
+
 export default function setup() {
   ipcMain.on(keys.openWithBrowser, openWithBrowser);
   ipcMain.on(keys.showDbFile, showDbFile);
@@ -115,4 +121,5 @@ export default function setup() {
   ipcMain.handle(keys.addTodoItem, addTodoItem);
   ipcMain.handle(keys.completeTodoItem, completeTodoItem);
   ipcMain.handle(keys.editTodoItem, editTodoItem);
+  ipcMain.handle(keys.deleteTodoItem, deleteTodoItem);
 }

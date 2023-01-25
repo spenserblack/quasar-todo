@@ -14,6 +14,7 @@ export interface ElectronAPI {
   addTodoItem(listId: number, content: string): Promise<TodoItem>;
   completeTodoItem(id: number, done?: boolean): Promise<TodoItem>;
   editTodoItem(id: number, content: string): Promise<TodoItem>;
+  deleteTodoItem(id: number): Promise<TodoItem>;
 }
 
 declare global {
@@ -38,6 +39,7 @@ export const getTodoItems =
 export const addTodoItem = electron?.addTodoItem ?? addItemToLocalStorage;
 export const completeTodoItem = electron?.completeTodoItem ?? completeTodoItemInLocalStorage;
 export const editTodoItem = electron?.editTodoItem ?? editTodoItemInLocalStorage;
+export const deleteTodoItem = electron?.deleteTodoItem ?? deleteTodoItemInLocalStorage;
 
 const localStorageListKey = 'todoLists';
 let cachedLocalStorageLists: TodoList[];
@@ -117,6 +119,8 @@ function addItemToLocalStorage(listId: number, content: string): TodoItem {
   return newItem;
 }
 
+// TODO: Reduce repetition
+
 function completeTodoItemInLocalStorage(id: number, done = true): TodoItem {
   const items = Object.values(cachedLocalStorageItems).flat();
   const item = items.find((i) => i.id === id);
@@ -139,6 +143,14 @@ function editTodoItemInLocalStorage(id: number, content: string): TodoItem {
   item.content = content;
   saveCachedLocalStorageItems();
   return item;
+}
+
+function deleteTodoItemInLocalStorage(id: number): TodoItem {
+  const items = Object.values(cachedLocalStorageItems).flat();
+  const index = items.findIndex((i) => i.id === id);
+  const deletedItem = items.splice(index, 1)[0];
+  saveCachedLocalStorageItems();
+  return deletedItem;
 }
 
 function saveCachedLocalStorageItems(): void {
