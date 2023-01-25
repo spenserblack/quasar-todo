@@ -20,9 +20,9 @@
     "@quasar/extras": "^1.0.0",
     "electron-updater": "^5.3.0",
     "pinia": "^2.0.11",
-    "quasar": "^2.6.0",
-    "sequelize": "^6.23.2",
-    "sqlite3": "^5.1.1",
+    "quasar": "^2.11.5",
+    "sequelize": "^6.28.0",
+    "sqlite3": "^5.1.4",
     "vue": "^3.0.0",
     "vue-i18n": "^9.2.2",
     "vue-router": "^4.0.0"
@@ -39,10 +39,10 @@
     "electron-builder": "^23.6.0",
     "eslint": "^8.10.0",
     "eslint-config-prettier": "^8.1.0",
-    "eslint-plugin-vue": "^9.0.0",
+    "eslint-plugin-vue": "^9.9.0",
     "postcss": "^8.1.0",
     "prettier": "^2.5.1",
-    "typescript": "^4.5.4",
+    "typescript": "^4.9.4",
     "vite": "^2.0.0"
   },
   "engines": {
