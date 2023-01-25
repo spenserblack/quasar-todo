@@ -19,7 +19,7 @@
   "dependencies": {
     "@quasar/extras": "^1.0.0",
     "pinia": "^2.0.11",
-    "quasar": "^2.6.0",
+    "quasar": "^2.11.5",
     "sequelize": "^6.28.0",
     "sqlite3": "^5.1.4",
     "vue": "^3.0.0",
