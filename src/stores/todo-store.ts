@@ -4,7 +4,6 @@ import type { TodoList, TodoItem } from '../models';
 
 type StoreTodoList = TodoList & { items?: TodoItem[] | null };
 
-// TODO: Set store asynchronously (probably needs to be done in App.vue)
 // TODO: Reduce repeated code
 export const useTodoStore = defineStore('todo', {
   state: () => ({
