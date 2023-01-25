@@ -37,9 +37,12 @@ export const editTodoListTitle =
 export const getTodoItems =
   electron?.getTodoItems ?? getTodoItemsFromLocalStorage;
 export const addTodoItem = electron?.addTodoItem ?? addItemToLocalStorage;
-export const completeTodoItem = electron?.completeTodoItem ?? completeTodoItemInLocalStorage;
-export const editTodoItem = electron?.editTodoItem ?? editTodoItemInLocalStorage;
-export const deleteTodoItem = electron?.deleteTodoItem ?? deleteTodoItemInLocalStorage;
+export const completeTodoItem =
+  electron?.completeTodoItem ?? completeTodoItemInLocalStorage;
+export const editTodoItem =
+  electron?.editTodoItem ?? editTodoItemInLocalStorage;
+export const deleteTodoItem =
+  electron?.deleteTodoItem ?? deleteTodoItemInLocalStorage;
 
 const localStorageListKey = 'todoLists';
 let cachedLocalStorageLists: TodoList[];

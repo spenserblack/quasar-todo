@@ -154,7 +154,11 @@ onMounted(async () => {
               />
             </q-item-section>
           </q-item>
-          <q-item v-for="item in todo.items" :key="item.id" :class="item.done ? 'bg-positive' : ''">
+          <q-item
+            v-for="item in todo.items"
+            :key="item.id"
+            :class="item.done ? 'bg-positive' : ''"
+          >
             <q-item-section>
               <q-item-label>{{ item.content }}</q-item-label>
             </q-item-section>

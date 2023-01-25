@@ -89,7 +89,6 @@ async function addTodoItem(
   return todoItem.toJSON();
 }
 
-
 async function completeTodoItem(_event: InvokeEvent, id: number, done = true) {
   const todoItem = await unsafeGetTodoItem(id);
   todoItem.done = done;
