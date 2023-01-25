@@ -1,4 +1,5 @@
 import { app, BrowserWindow, nativeTheme } from 'electron';
+import { autoUpdater } from 'electron-updater';
 import path from 'path';
 import os from 'os';
 import setupIpcMain from './electron-ipc-main';
@@ -51,6 +52,8 @@ function createWindow() {
 }
 
 app.whenReady().then(async () => {
+  autoUpdater.checkForUpdatesAndNotify();
+
   await db.sync();
   setupIpcMain();
   createWindow();
