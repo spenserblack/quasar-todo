@@ -6,7 +6,7 @@ import EssentialLink, {
 } from 'components/EssentialLink.vue';
 import EssentialResource from 'components/EssentialResource.vue';
 import { useTodoStore } from '../stores/todo-store';
-import { showDbFile } from '../api';
+import { showDbFile, exportAsJson } from '../api';
 import { saveTheme } from '../util';
 
 const $q = useQuasar();
@@ -123,6 +123,20 @@ function toggleRightDrawer() {
           caption="Show database file"
           icon="folder_open"
           @click="showDbFile"
+        />
+        <EssentialResource
+          class="electron-only"
+          title="Export as JSON (minified)"
+          caption="Export database as JSON"
+          icon="save_alt"
+          @click="exportAsJson(true)"
+        />
+        <EssentialResource
+          class="electron-only"
+          title="Export as JSON (pretty)"
+          caption="Export database as JSON in a readable format"
+          icon="save_alt"
+          @click="exportAsJson(false)"
         />
 
         <q-separator class="electron-only" inset />

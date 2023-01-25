@@ -3,6 +3,7 @@ import type { TodoList, TodoItem } from './models';
 export interface ElectronAPI {
   openWithBrowser(url: string): void;
   showDbFile(): void;
+  exportAsJson(minify: boolean): void;
   getTodoLists(): Promise<TodoList[]>;
   addTodoList(name: string): Promise<TodoList>;
   deleteTodoList(id: number): Promise<TodoList>;
@@ -28,6 +29,7 @@ export const isElectron = electron != null;
 
 export const openExternalLink = electron?.openWithBrowser ?? noop;
 export const showDbFile = electron?.showDbFile ?? noop;
+export const exportAsJson = electron?.exportAsJson ?? noop;
 export const getTodoLists = electron?.getTodoLists ?? listsFromLocalStorage;
 export const addTodoList = electron?.addTodoList ?? addListToLocalStorage;
 export const deleteTodoList =
