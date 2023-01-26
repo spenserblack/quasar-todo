@@ -1,6 +1,7 @@
 import { shell, ipcMain } from 'electron';
 import { getDbPath, TodoList, TodoItem } from './db';
 import { exportToJson } from './export';
+import { importFromJson } from './import';
 import * as keys from './electron-ipc-keys';
 import type {
   IpcMainEvent as Event,
@@ -114,6 +115,7 @@ export default function setup() {
   ipcMain.on(keys.openWithBrowser, openWithBrowser);
   ipcMain.on(keys.showDbFile, showDbFile);
   ipcMain.on(keys.exportAsJson, (_event: Event, minify: boolean) => exportToJson(minify));
+  ipcMain.on(keys.importFromJson, (_event: Event) => importFromJson());
   ipcMain.handle(keys.getTodoLists, getTodoLists);
   ipcMain.handle(keys.addTodoList, addTodoList);
   ipcMain.handle(keys.deleteTodoList, deleteTodoList);
