@@ -1,0 +1,20 @@
+{
+  "name": "Node.js",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": { "VARIANT": "16-bullseye" }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": ["EditorConfig.EditorConfig", "esbenp.prettier-vscode"]
+    }
+  },
+  "portsAttributes": {
+    "3000": {
+      "label": "Site (dev)",
+      "onAutoForward": "notify"
+    }
+  },
+  "postCreateCommand": ".devcontainer/postCreate.sh",
+  "remoteUser": "node"
+}
