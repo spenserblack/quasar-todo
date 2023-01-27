@@ -6,7 +6,7 @@ import EssentialLink, {
 } from 'components/EssentialLink.vue';
 import EssentialResource from 'components/EssentialResource.vue';
 import { useTodoStore } from '../stores/todo-store';
-import { showDbFile, exportAsJson } from '../api';
+import { showDbFile, exportAsJson, importFromJson } from '../api';
 import { saveTheme } from '../util';
 
 const $q = useQuasar();
@@ -137,6 +137,13 @@ function toggleRightDrawer() {
           caption="Export database as JSON in a readable format"
           icon="save_alt"
           @click="exportAsJson(false)"
+        />
+        <EssentialResource
+          class="electron-only"
+          title="Import from JSON"
+          caption="Import (append) data from JSON"
+          icon="publish"
+          @click="importFromJson"
         />
 
         <q-separator class="electron-only" inset />
