@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useQuasar } from 'quasar';
-import { computed, watch } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { useRoute, useRouter, onBeforeRouteLeave } from 'vue-router';
 import { useTodoStore } from '../stores/todo-store';
 // TODO: Use QCheckbox with indeterminate state for "done" filter
@@ -19,6 +19,14 @@ const unwatchId = watch(
   async () => await todoStore.getTodoListItems(todo.value.id),
   { immediate: true }
 );
+
+const searchText = ref('');
+const searchedItems = computed(() => {
+  if (searchText.value === '') return todo.value?.items;
+  return todo.value?.items?.filter((item) =>
+    item.content.toLowerCase().includes(searchText.value.toLowerCase())
+  );
+});
 
 const onDelete = () => {
   $q.dialog({
@@ -137,6 +145,22 @@ onBeforeRouteLeave(() => {
     </div>
     <div class="row items-center justify-evenly">
       <div class="col-xs-12 col-md-6">
+        <q-input dense filled v-model="searchText" input-class="text-right">
+          <template #append>
+            <q-icon v-if="searchText === ''" name="search" />
+            <q-icon
+              v-else
+              name="clear"
+              class="cursor-pointer"
+              @click="searchText = ''"
+            />
+          </template>
+        </q-input>
+      </div>
+    </div>
+
+    <div class="row items-center justify-evenly">
+      <div class="col-xs-12 col-md-6">
         <q-list v-if="loadingItems">
           <q-item v-for="i in 3" :key="i">
             <q-item-section>
@@ -161,7 +185,7 @@ onBeforeRouteLeave(() => {
             </q-item-section>
           </q-item>
           <q-item
-            v-for="item in todo.items"
+            v-for="item in searchedItems"
             :key="item.id"
             :class="item.done ? 'bg-positive' : ''"
           >
