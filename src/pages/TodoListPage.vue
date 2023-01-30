@@ -28,6 +28,17 @@ const searchedItems = computed(() => {
   );
 });
 
+const doneFilter = ref<boolean | 'all'>('all');
+const doneFilterLabel = computed(() => {
+  if (doneFilter.value === false) return 'Not done';
+  if (doneFilter.value === true) return 'Done';
+  return 'All';
+});
+const filteredItems = computed(() => {
+  if (doneFilter.value === 'all') return searchedItems.value;
+  return searchedItems.value?.filter((item) => item.done === doneFilter.value);
+});
+
 const onDelete = () => {
   $q.dialog({
     title: `Delete ${todo.value.name}?`,
@@ -143,8 +154,8 @@ onBeforeRouteLeave(() => {
         </q-btn-group>
       </div>
     </div>
-    <div class="row items-center justify-evenly">
-      <div class="col-xs-12 col-md-6">
+    <div class="row items-center justify-center">
+      <div class="col-xs-10 col-md-3 offset-md-1">
         <q-input dense filled v-model="searchText" input-class="text-right">
           <template #append>
             <q-icon v-if="searchText === ''" name="search" />
@@ -156,6 +167,16 @@ onBeforeRouteLeave(() => {
             />
           </template>
         </q-input>
+      </div>
+      <div class="col-xs-2 col-md-1 offset-md-1">
+        <q-checkbox
+          v-model="doneFilter"
+          dense
+          color="secondary"
+          indeterminate-value="all"
+          toggle-indeterminate
+          :label="doneFilterLabel"
+        />
       </div>
     </div>
 
@@ -185,7 +206,7 @@ onBeforeRouteLeave(() => {
             </q-item-section>
           </q-item>
           <q-item
-            v-for="item in searchedItems"
+            v-for="item in filteredItems"
             :key="item.id"
             :class="item.done ? 'bg-positive' : ''"
           >
