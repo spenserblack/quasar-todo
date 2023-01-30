@@ -20,6 +20,8 @@ jobs:
         cache: yarn
     - run: yarn install --frozen-lockfile
     - run: yarn lint
+    - name: Prettier
+      run: yarn format-check
 
   build:
 
