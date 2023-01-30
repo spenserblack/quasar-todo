@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useQuasar } from 'quasar';
-import { computed, onMounted } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { computed, watch } from 'vue';
+import { useRoute, useRouter, onBeforeRouteLeave } from 'vue-router';
 import { useTodoStore } from '../stores/todo-store';
 // TODO: Use QCheckbox with indeterminate state for "done" filter
 
@@ -13,6 +13,12 @@ const todoStore = useTodoStore();
 
 const todo = computed(() => todoStore.listsById[route.params.id]);
 const loadingItems = computed(() => todo.value?.items == null);
+
+const unwatchId = watch(
+  () => route.params.id,
+  async () => await todoStore.getTodoListItems(todo.value.id),
+  { immediate: true }
+);
 
 const onDelete = () => {
   $q.dialog({
@@ -98,8 +104,8 @@ const deleteTodoItem = async (id: number) => {
   await todoStore.deleteTodoItem(todo.value.id, id);
 };
 
-onMounted(async () => {
-  await todoStore.getTodoListItems(todo.value.id);
+onBeforeRouteLeave(() => {
+  unwatchId();
 });
 </script>
 
