@@ -24,12 +24,16 @@ async function readImport(data: unknown) {
     throw new Error(errors.join(', '));
   }
 
-  const todoLists = await db.TodoList.bulkCreate(value.todoLists.map(({ name }) => ({ name })));
-  const bulkTodoItems = value.todoLists.map(({ items }, index) => items.map(({ content, done }) => ({
-    content,
-    done,
-    listId: todoLists[index].id,
-  })));
+  const todoLists = await db.TodoList.bulkCreate(
+    value.todoLists.map(({ name }) => ({ name }))
+  );
+  const bulkTodoItems = value.todoLists.map(({ items }, index) =>
+    items.map(({ content, done }) => ({
+      content,
+      done,
+      listId: todoLists[index].id,
+    }))
+  );
   await db.TodoItem.bulkCreate(bulkTodoItems.flat());
 }
 
@@ -40,5 +44,7 @@ export async function importFromJson() {
   if (filePath == null) {
     return;
   }
-  await readFromFile(filePath, (contents: string) => readImport(JSON.parse(contents)));
+  await readFromFile(filePath, (contents: string) =>
+    readImport(JSON.parse(contents))
+  );
 }

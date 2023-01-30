@@ -3,7 +3,11 @@ import { resolve } from 'path';
 import { dialog, app } from 'electron';
 import type { FileFilter } from 'electron';
 
-export async function dataExportPath(title: string, filename: string, filters: FileFilter[]): Promise<string | null | undefined> {
+export async function dataExportPath(
+  title: string,
+  filename: string,
+  filters: FileFilter[]
+): Promise<string | null | undefined> {
   const { canceled, filePath } = await dialog.showSaveDialog({
     title,
     buttonLabel: 'Export',
@@ -14,8 +18,14 @@ export async function dataExportPath(title: string, filename: string, filters: F
   return filePath;
 }
 
-export async function dataImportPath(title: string, filters: FileFilter[]): Promise<string | null | undefined> {
-  const { canceled, filePaths: [filePath] } = await dialog.showOpenDialog({
+export async function dataImportPath(
+  title: string,
+  filters: FileFilter[]
+): Promise<string | null | undefined> {
+  const {
+    canceled,
+    filePaths: [filePath],
+  } = await dialog.showOpenDialog({
     title,
     buttonLabel: 'Import',
     properties: ['openFile'],
@@ -47,7 +57,10 @@ export async function writeToFile(path: string, data: string) {
  * This is a helper that reads from a file using a dialog to select
  * the file path.
  */
-export async function readFromFile(path: string, handler: (contents: string) => Promise<void>) {
+export async function readFromFile(
+  path: string,
+  handler: (contents: string) => Promise<void>
+) {
   try {
     const data = await readFile(path, 'utf-8');
     await handler(data);

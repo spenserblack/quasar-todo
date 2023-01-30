@@ -4,7 +4,8 @@ import * as keys from './electron-ipc-keys';
 contextBridge.exposeInMainWorld('electronAPI', {
   openWithBrowser: (url: string) => ipcRenderer.send(keys.openWithBrowser, url),
   showDbFile: () => ipcRenderer.send(keys.showDbFile),
-  exportAsJson: (minify: boolean) => ipcRenderer.send(keys.exportAsJson, minify),
+  exportAsJson: (minify: boolean) =>
+    ipcRenderer.send(keys.exportAsJson, minify),
   importFromJson: () => ipcRenderer.send(keys.importFromJson),
   getTodoLists: () => ipcRenderer.invoke(keys.getTodoLists),
   addTodoList: (title: string) => ipcRenderer.invoke(keys.addTodoList, title),

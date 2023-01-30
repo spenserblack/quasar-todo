@@ -114,7 +114,9 @@ async function deleteTodoItem(_event: InvokeEvent, id: number) {
 export default function setup() {
   ipcMain.on(keys.openWithBrowser, openWithBrowser);
   ipcMain.on(keys.showDbFile, showDbFile);
-  ipcMain.on(keys.exportAsJson, (_event: Event, minify: boolean) => exportToJson(minify));
+  ipcMain.on(keys.exportAsJson, (_event: Event, minify: boolean) =>
+    exportToJson(minify)
+  );
   ipcMain.on(keys.importFromJson, (_event: Event) => importFromJson());
   ipcMain.handle(keys.getTodoLists, getTodoLists);
   ipcMain.handle(keys.addTodoList, addTodoList);
