@@ -175,6 +175,7 @@ onBeforeRouteLeave(() => {
           color="secondary"
           indeterminate-value="all"
           toggle-indeterminate
+          toggle-order="ft"
           :label="doneFilterLabel"
         />
       </div>
