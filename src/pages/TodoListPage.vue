@@ -102,11 +102,13 @@ const markTodoItem = async (id: number, done: boolean) => {
 };
 
 const onEditTodoItem = async (id: number) => {
+  // NOTE: Assuming that this is never null
+  const todoItem = todo.value.items?.find((item) => item.id === id);
   $q.dialog({
     title: 'Edit item',
     message: 'Enter new text for the item',
     prompt: {
-      model: todo.value.items[id].content,
+      model: todoItem.content,
       type: 'text',
       isValid: (content) => !!content,
       label: 'Todo Item Text',
