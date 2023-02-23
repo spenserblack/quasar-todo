@@ -21,7 +21,7 @@
     "electron-updater": "^5.3.0",
     "pinia": "^2.0.11",
     "quasar": "^2.11.5",
-    "sequelize": "^6.28.0",
+    "sequelize": "^6.28.2",
     "sqlite3": "^5.1.4",
     "typanion": "^3.12.1",
     "vue": "^3.0.0",
