@@ -26,7 +26,7 @@
     "typanion": "^3.12.1",
     "vue": "^3.0.0",
     "vue-i18n": "^9.2.2",
-    "vue-router": "^4.2.2"
+    "vue-router": "^4.2.4"
   },
   "devDependencies": {
     "@intlify/vite-plugin-vue-i18n": "^3.3.1",
