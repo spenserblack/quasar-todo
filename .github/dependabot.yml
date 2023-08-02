@@ -2,5 +2,10 @@ version: 2
 updates:
   - package-ecosystem: npm
     directory: "/"
+    groups:
+      quasar:
+        patterns:
+          - "quasar"
+          - "@quasar/*"
     schedule:
       interval: monthly
