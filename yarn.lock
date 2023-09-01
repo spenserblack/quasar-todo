@@ -345,10 +345,10 @@
     "@pnpm/network.ca-file" "^1.0.1"
     config-chain "^1.1.11"
 
-"@quasar/app-vite@^1.4.3":
-  version "1.4.3"
-  resolved "https://registry.yarnpkg.com/@quasar/app-vite/-/app-vite-1.4.3.tgz#442944cace5008c473411212b04af3a46090ae0a"
-  integrity sha512-5iMs1sk6fyYTFoRVySwFXWL/PS23UEsdk+YSFejhXnSs5fVDmb2GQMguCHwDl3jPIHjZ7A+XKkb2iWx9pjiPXw==
+"@quasar/app-vite@^1.4.7":
+  version "1.4.7"
+  resolved "https://registry.yarnpkg.com/@quasar/app-vite/-/app-vite-1.4.7.tgz#d896f0f5ee5697b579c43ddbd0716570306f4bc2"
+  integrity sha512-/R9LcWRQMLngU7viOJqz78/8aJMjFxCOgS/16QPckO/oyTZZM33wI94icPD0h1LUPxlDCXwzA40BEJMWiUd31Q==
   dependencies:
     "@quasar/render-ssr-error" "^1.0.1"
     "@quasar/vite-plugin" "^1.3.3"
@@ -385,10 +385,10 @@
     vite "^2.9.13"
     webpack-merge "^5.8.0"
 
-"@quasar/cli@^2.2.1":
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/@quasar/cli/-/cli-2.2.1.tgz#8b7c3016c5681c1a9967265a8fe3943269dd4c3a"
-  integrity sha512-PMwJ76IeeNRRBw+08hUMjhqGC6JKJ/t1zIb+IOiyR5D4rkBR26Ha/Z46OD3KfwUprq4Q8s4ieB1+d3VY8FhPKg==
+"@quasar/cli@^2.2.3":
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/@quasar/cli/-/cli-2.2.3.tgz#d68e59e8821d8f0b57aabea5577787d0a4ac3641"
+  integrity sha512-mDLq/LICFbW7sIYte1DyJrBe55LPuYXPYydhQS0Mfjcaob9JuE7o2lDtT+cUwvEwOVYmcDMSg8dNhIqB+wwxjw==
   dependencies:
     "@quasar/ssl-certificate" "^1.0.0"
     ci-info "^3.8.0"
@@ -406,10 +406,10 @@
     selfsigned "^2.0.0"
     update-notifier "^6.0.2"
 
-"@quasar/extras@^1.16.5":
-  version "1.16.5"
-  resolved "https://registry.yarnpkg.com/@quasar/extras/-/extras-1.16.5.tgz#77fd7b8e77e45a2798067a1e4aeafb39a95daf51"
-  integrity sha512-3VAJS9NECr1OSHX674+3YvEMIlHclr81aZrEkoBtVqr+sX4In22Up44toua+qNFsxnoATPqzpwKOJxA3iAF71Q==
+"@quasar/extras@^1.16.6":
+  version "1.16.6"
+  resolved "https://registry.yarnpkg.com/@quasar/extras/-/extras-1.16.6.tgz#6b79d3c01785793c10543c93f21653e26539a740"
+  integrity sha512-yHvp2Z73LuS29fhjE+dSzUvEKGCuTTy+WGIsAYxbnhBVW2rTYlYmFQfGdOPdzNreHZh+G/1D56n0Q6ClZxJHKg==
 
 "@quasar/render-ssr-error@^1.0.1":
   version "1.0.2"
@@ -4482,10 +4482,10 @@ qs@6.11.0:
   dependencies:
     side-channel "^1.0.4"
 
-quasar@^2.12.3:
-  version "2.12.3"
-  resolved "https://registry.yarnpkg.com/quasar/-/quasar-2.12.3.tgz#dd898cce1bbaf9e02310cc7e777c9c42a836a003"
-  integrity sha512-9KK5TXWGsZ6XFF6MJQ0E98yp++D1PagqSJrKpE91A6QnZ1gng4KtkFI5iPyuqXciFpXvxniiLsZtxD5ZICHvPw==
+quasar@^2.12.5:
+  version "2.12.5"
+  resolved "https://registry.yarnpkg.com/quasar/-/quasar-2.12.5.tgz#f5e907500dad613cc5787d89ba2c57f4f4efe80a"
+  integrity sha512-YPG9O+bRq3imN53EGKPyM6rUdx+IGxrs4Q1AljeA4JQh0FibWyPzM44hxFpO8JQiuWAJ5e5wZXhsyeyFyb4a2w==
 
 queue-microtask@^1.2.2:
   version "1.2.3"
