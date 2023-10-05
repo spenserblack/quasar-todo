@@ -17,10 +17,10 @@
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
-    "@quasar/extras": "^1.16.6",
+    "@quasar/extras": "^1.16.7",
     "electron-updater": "^6.1.1",
     "pinia": "^2.0.35",
-    "quasar": "^2.12.5",
+    "quasar": "^2.12.7",
     "sequelize": "^6.32.1",
     "sqlite3": "^5.1.6",
     "typanion": "^3.12.1",
@@ -30,8 +30,8 @@
   },
   "devDependencies": {
     "@intlify/vite-plugin-vue-i18n": "^3.3.1",
-    "@quasar/app-vite": "^1.4.7",
-    "@quasar/cli": "^2.2.3",
+    "@quasar/app-vite": "^1.6.2",
+    "@quasar/cli": "^2.3.0",
     "@types/node": "^12.20.21",
     "@typescript-eslint/eslint-plugin": "^5.10.0",
     "@typescript-eslint/parser": "^5.10.0",
