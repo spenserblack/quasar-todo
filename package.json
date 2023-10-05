@@ -1,6 +1,6 @@
 {
   "name": "quasar-todo",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "A to-do list built with Electron + Quasar",
   "productName": "Quasar Todo",
   "author": "Spenser Black",
