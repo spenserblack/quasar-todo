@@ -20,7 +20,7 @@
     "@quasar/extras": "^1.16.9",
     "electron-updater": "^6.1.1",
     "pinia": "^2.0.35",
-    "quasar": "^2.14.2",
+    "quasar": "^2.14.3",
     "sequelize": "^6.32.1",
     "sqlite3": "^5.1.6",
     "typanion": "^3.12.1",
