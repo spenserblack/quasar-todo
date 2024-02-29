@@ -4,6 +4,11 @@
 
 A to-do list built with Electron + Quasar
 
+> [!WARNING]
+> Because I'm personally not using this anymore, I am archiving this project. If you stumble on this
+> project and would like to see further development, you can raise an issue or discussion on my GH
+> profile.
+
 ## Install the dependencies
 
 ```bash
